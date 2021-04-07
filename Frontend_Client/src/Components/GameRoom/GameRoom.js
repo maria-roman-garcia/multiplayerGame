@@ -3,7 +3,6 @@ import "./GameRoom.scss";
 import { useParams } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
-const START_GAME = "startGame"; // Name of the event
 const SOCKET_SERVER_URL = "http://localhost:4000";
 
 const GameRoom = () => {
