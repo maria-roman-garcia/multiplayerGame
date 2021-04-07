@@ -4,7 +4,6 @@ import { GameMatch } from "./game/GameMatch";
 
 var http = require('http');
 var server = http.createServer();
-ç
 const io = require("socket.io")(server, {
     cors: {
         origin: "*",
