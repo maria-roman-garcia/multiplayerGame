@@ -20,10 +20,10 @@ export class GameMatch {
 
     player1Score = 0;
     player2Score = 0;
-    
+
     player1Position = null;
     player2Position = null;
-    
+
     ball = null;
     isGameStarted = false;
 
@@ -39,7 +39,7 @@ export class GameMatch {
         this.player2 = player2
     }
 
-    //TODO: Remove
+    //TODO: Remove? it shoukd go in the front?
     newPositionOfPlayer = (event, player) => {
         switch (event.keyCode) {
             // "up arrow" key
@@ -55,47 +55,28 @@ export class GameMatch {
                 }
                 break;
         }
-    }    
+    }
 
     detectCollision = () => {
-        if (this.ball.position_Y + ball.radius <= 0) { // check if ball hits top or bottom wall
+        if (this.ball.position_Y + ball.radius <= 0) { // check if ball hits top wall
             this.ball.direction_Y = this.ball.direction_Y * -1;
             this.ball.position_Y = this.ball.direction_Y;
-        } else if (this.ball.position_Y >= this.fieldDimensions.heigth_Y) { // La bola se sale por abajo
+        } else if (this.ball.position_Y >= this.fieldDimensions.heigth_Y) { // check if ball hits bottoms wall
             this.ball.direction_Y = this.ball.direction_Y * -1;
             this.ball.position_Y = this.fieldDimensions.heigth_Y + this.ball.direction_Y;
         } else if (this.ball.position_X + ball.radius >= this.fieldDimensions.width_X) { // if ball hit on right wall = gamer2
-            //Si el player 2 tiene la barrita en la posición por la que se está saliendo, que rebote:
-
-            // HE VISTO ESTA FormData, NOSOTROS NO CALCULAMOS EL ANGULO...
-            // let angle = 0;
-            // // if ball hit the top of paddle
-            // if (getBall().y < (player.y + player.height / 2)) {
-            //     // then -1 * Math.PI / 4 = -45deg
-            //     angle = -1 * Math.PI / 4;
-            // } else if (getBall().y > (player.y + player.height / 2)) {
-            //     // if it hit the bottom of paddle
-            //     // then angle will be Math.PI / 4 = 45deg
-            //     angle = Math.PI / 4;
-            // }
-            // // change velocity of ball according to on which paddle the ball hitted
-            // getBall().velocityX = (player === getUser1() ? 1 : -1) * getBall().speed * Math.cos(angle);
-            // getBall().velocityY = getBall().speed * Math.sin(angle);
-
-            // //increase ball speed
-            // getBall().speed += 0.2;
-
+            //If player 2 has the bar in the same position as the ball
             if (this.ball.position_Y < player.position_Y || this.ball.position_Y < player.position_Y - 100) {
                 this.ball.direction_X = this.ball.direction_X * -1;
-            } else { //que sume punto al player1
+            } else { //point up player1
                 this.pointUp(PLAYER.P1);
                 this.reset();
             }
         } else if (this.ball.position_X - ball.radius <= 0) { // if ball hit on left wall = gamer1
-            //Si el player 1 tiene la barrita en la posición por la que se está saliendo, que rebote:
+            //If player 1 has the bar in the same position as the ball
             if (this.ball.position_Y < player.position_Y || this.ball.position_Y < player.position_Y - 100) {
                 this.ball.direction_X = this.ball.direction_X * -1;
-            } else { //que sume punto al player2
+            } else { //point up player2
                 this.pointUp(PLAYER.P2);
                 this.reset();
             }
@@ -112,12 +93,12 @@ export class GameMatch {
     }
 
     updatePlayerPostion = (player, position) => {
-        if(player ===  PLAYER.P1) {
+        if (player === PLAYER.P1) {
             this.player1Position += position;
         } else {
             this.player2Position += position;
         }
-    } 
+    }
 
     // reset the ball
     reset() {
@@ -127,13 +108,10 @@ export class GameMatch {
 
     // update function, to update things position
     update() {
-        //3. mover la pelota (sumar a la posición actual x la direcciónx * speed y supmar a la posición actual y la direccióny * speed)
         this.ball.updatePosition();
 
-        //4. detectar colisiones (llamar a la función que automáticamente detecta si se ha salido la pelota)
         this.detectCollision();
 
-        //6. Si algun jugador ha llegado a score 10, terminar el juego y mostrar quién ha ganado else, volver a llamar a la función update()
         if (this.player.score + this.player2.score === this.totalscore) {
             this.endGame();
         } else {
@@ -142,13 +120,13 @@ export class GameMatch {
     }
 
     startGame = () => {
-        if(this.player2 !== null) {
+        if (this.player2 !== null) {
             this.isGameStarted = true;
         }
     }
 
     resetPlayer = (player) => {
-        if(player === PLAYER.P1) {
+        if (player === PLAYER.P1) {
             this.player1Position = 0;
         } else {
             this.player2Position = 0;
@@ -157,10 +135,10 @@ export class GameMatch {
 
     endGame = () => {
         this.isGameStarted = false;
-        
+
         this.player1Score = 0;
         this.player2Score = 0;
-        
+
         this.resetPlayer(PLAYER.P1);
         this.resetPlayer(PLAYER.P2);
 
