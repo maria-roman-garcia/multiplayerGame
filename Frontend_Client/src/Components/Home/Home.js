@@ -41,7 +41,7 @@ const Home = () => {
     ];
 
     const createMatch=()=>{
-        socketRef.current.on(CREATE_MATCH, (matchId) => {
+        socketRef.current.emit(CREATE_MATCH, (matchId) => {
             setNewMatchId(matchId);
         });
     }

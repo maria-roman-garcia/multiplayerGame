@@ -1,7 +1,7 @@
 const BALL_SPEED = 10;
 const BALL_RADIOUS = 1; // Percent
 
-export class Ball {
+module.exports = class Ball {
   position_X = 0;
   position_Y = 0;
   speed = BALL_SPEED;

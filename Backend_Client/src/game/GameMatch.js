@@ -1,6 +1,6 @@
-import { v4 as uuidv4 } from "uuid";
-import { Ball } from "./Ball";
-import { Player } from "./Player";
+const { v4 } = require("uuid");
+const { Ball } = require("./Ball");
+const { Player } = require("./Player");
 
 const TOTAL_SCORE = 10;
 
@@ -9,7 +9,7 @@ const PLAYER = {
   P2: 1,
 };
 
-export class GameMatch {
+module.exports = class GameMatch {
   gameMatchId = -1;
   totalscore = TOTAL_SCORE;
   fieldDimension = null;
@@ -28,7 +28,7 @@ export class GameMatch {
 
   constructor(player1) {
     //Properties
-    this.gameMatchId = uuidv4();
+    this.gameMatchId = v4();
     this.player1 = player1;
     this.ball = new Ball();
   }

@@ -1,6 +1,6 @@
-// import { RECEIVED_PLAYER_COMMANDS, EMITTED_PLAYER_COMMANDS } from "./protocol/player/commands";
-import { Player } from "./game/Player";
-// import { GameMatch } from "./game/GameMatch";
+const { RECEIVED_PLAYER_COMMANDS, EMITTED_PLAYER_COMMANDS } = require("./player/commands");
+const { Player } = require("./game/Player");
+const { GameMatch } = require("./game/GameMatch");
 
 const server = require("http").createServer();
 const io = require("socket.io")(server, {
